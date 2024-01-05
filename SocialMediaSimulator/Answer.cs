@@ -9,7 +9,12 @@ namespace SocialMediaSimulator
     internal class Answer : Comment
     {
         string m_username;
-        string m_mainContent;
+        string initialContent;
         string content;
+
+        public void AnswerComment()
+        {
+
+        }
     }
 }

@@ -10,12 +10,14 @@ namespace SocialMediaSimulator
     {
         string m_userName;
         string description;
+        public int likeCount;
+        static int nextId;
+        public int PostId { get; private set; }
+        List<string> Comments = new List<string>();
 
-        private void PostPicture()
+        public Post()
         {
-
+            PostId = Interlocked.Increment(ref nextId);
         }
-
-        private void PostText() { }
     }
 }
