@@ -10,10 +10,9 @@ namespace SocialMediaSimulator
     {
         string m_userName;
         string description;
-        public int likeCount;
         static int nextId;
         public int PostId { get; private set; }
-        List<string> Comments = new List<string>();
+        List<string> Posts = new List<string>();
 
         public Post()
         {

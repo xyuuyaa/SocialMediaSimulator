@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialMediaSimulator
 {
-    internal class Answer : Comment
+    internal class Simulator
     {
-        string m_username;
-        string initialContent;
-        string content;
-
     }
 }

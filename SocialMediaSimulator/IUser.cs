@@ -8,21 +8,12 @@ namespace SocialMediaSimulator
 {
     internal interface IUser
     {
-        string creationDate { get; set; }
+        int accountId { get; set; }
+        static int nextId;
 
-        void DeletePost(int postId)
-        {
+        void DeletePost(int accountId, int postId);
 
-        }
 
-        void DeleteAccount(int accountId)
-        {
-
-        }
-
-        void DeleteComment(int commentId) 
-        { 
-        
-        }
+        void DeleteComment(int accountId, int postId ,int commentId);
     }
 }
