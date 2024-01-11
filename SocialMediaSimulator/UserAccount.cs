@@ -23,31 +23,24 @@ namespace SocialMediaSimulator
             return $"Id: {accountId}, Name: {accountName}";
         }
 
-        private void NewComment(UserAccount commentingUser,Post sourcePost, string commentContent)
-        {
-            Comment comment = new Comment(commentingUser, sourcePost, commentContent);
-        }
-
-        private void NewPost(UserAccount postingUser, string TextContent)
+        public void NewPost(UserAccount postingUser, string TextContent)
         {
             Post post = new Post(postingUser, TextContent);
         }
 
-        private string getName(int postId) 
+        public void NewComment(UserAccount commentingUser,Post sourcePost, string commentContent)
+        {
+            Comment comment = new Comment(commentingUser, sourcePost, commentContent);
+        }
+
+        public void NewAnswer(UserAccount answeringUser, Post sourcePost, Comment sourceComment, string answerContent) 
+        {
+            Answer answer = new Answer(answeringUser, sourcePost, answerContent);    // TODO use sourceComment
+        }
+
+        public string getName(int postId) 
         {
             return this.accountName;
-        }
-
-        public void DeletePost(Post deletePost)
-        {
-            // TODO
-            // delete every comment, answer with the same postId
-        }
-
-        public void DeleteComment(Comment deleteComment)
-        {
-            // TODO
-            // delete every answer with the same postId
         }
     }
 }

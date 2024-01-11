@@ -30,18 +30,28 @@ namespace SocialMediaSimulator
 
         public void DeleteAccount(IUser deleteAcc)
         {
+            foreach (Answer answer in Comment.comments) 
+            { 
+                if (answer._answeringUser.accountId == deleteAcc.accountId)
+                {
+                    Comment.comments.Remove(answer);
+                }
+            }
+            foreach (Comment comment in Comment.comments) 
+            {
+                if (comment._commentingUser.accountId == deleteAcc.accountId)
+                {
+                    Comment.comments.Remove(comment);
+                }
+            }
+            foreach (Post post in Post.posts) 
+            {
+                if (post._postingUser.accountId == deleteAcc.accountId)
+                {
+                    Post.posts.Remove(post);
+                }
+            }
             IUser.users.Remove(deleteAcc);
-            // TODO delete every answer, comment, post with the same accountId
-        }
-
-        public void DeletePost(Post deletePost)
-        {
-            // TODO remove the Post with the according postId from the posts List
-        }
-
-        public void DeleteComment(Comment deleteComment)
-        {
-            // TODO remove the Comment with the according accountId from the Comments List
         }
     }
 }

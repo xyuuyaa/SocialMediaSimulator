@@ -13,11 +13,15 @@ namespace SocialMediaSimulator
         static int nextId;
         public int CommentId { get; private set; }
         public static List<Comment> comments = new List<Comment>();
+        public Post _sourcePost;
+        public IUser _commentingUser;
 
         public Comment(UserAccount commentingUser, Post sourcePost, string commentContent)
         {
             CommentId = Interlocked.Increment(ref nextId);
-            // TODO
+            _sourcePost = sourcePost;
+            _commentingUser = commentingUser;
+            comments.Add(new Comment(commentingUser, sourcePost, commentContent));
         }
     }
 }

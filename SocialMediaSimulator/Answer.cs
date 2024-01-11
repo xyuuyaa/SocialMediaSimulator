@@ -11,10 +11,16 @@ namespace SocialMediaSimulator
         string m_username;
         string initialContent;
         string content;
+        public Comment _sourceComment;
+        public Post _sourcePost; // ??
+        public IUser _answeringUser;
 
+        // TODO help, I need Parameter sourceComment
         public Answer(UserAccount commentingUser, Post sourcePost, string commentContent) : base(commentingUser, sourcePost, commentContent)
         {
-            // TODO
+            // _sourceComment = sourceComment;
+            _sourcePost = sourcePost;
+            _answeringUser = commentingUser;
         }
     }
 }

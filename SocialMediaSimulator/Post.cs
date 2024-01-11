@@ -13,11 +13,13 @@ namespace SocialMediaSimulator
         static int nextId;
         public int PostId { get; private set; }
         public static List<Post> posts = new List<Post>();
+        public IUser _postingUser;
 
         public Post(UserAccount postingUser, string postContent)
         {
             PostId = Interlocked.Increment(ref nextId);
-            // TODO
+            posts.Add(new Post(postingUser, postContent));
+            _postingUser = postingUser;
         }
     }
 }
