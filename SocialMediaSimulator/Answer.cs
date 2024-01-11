@@ -12,5 +12,9 @@ namespace SocialMediaSimulator
         string initialContent;
         string content;
 
+        public Answer(UserAccount commentingUser, Post sourcePost, string commentContent) : base(commentingUser, sourcePost, commentContent)
+        {
+            // TODO
+        }
     }
 }

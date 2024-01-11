@@ -12,7 +12,7 @@ namespace SocialMediaSimulator
 {
     internal class Program
     {
-        public static List<IUser> users = new List<IUser>();
+        
         public static IUser currentUser; // User der zurzeit verwendet wird
         static void Main(string[] args) // move whole console stuff to Simulator.cs at the end for tidying up
         {

@@ -25,22 +25,23 @@ namespace SocialMediaSimulator
         public void AddAccount(string userName)
         {
             UserAccount newUser = new UserAccount(userName);
-            Program.users.Add(newUser);
+            IUser.users.Add(newUser);
         }
 
-        public void DeleteAccount(int accountId)
+        public void DeleteAccount(IUser deleteAcc)
         {
-            // remove the user with the according accountId from the users List
+            IUser.users.Remove(deleteAcc);
+            // TODO delete every answer, comment, post with the same accountId
         }
 
-        public void DeletePost(int accountId, int postId)
+        public void DeletePost(Post deletePost)
         {
-            // remove the Post with the according postId from the posts List
+            // TODO remove the Post with the according postId from the posts List
         }
 
-        public void DeleteComment(int accountId, int postId, int commentId)
+        public void DeleteComment(Comment deleteComment)
         {
-            // remove the Comment with the according accountId from the Comments List
+            // TODO remove the Comment with the according accountId from the Comments List
         }
     }
 }

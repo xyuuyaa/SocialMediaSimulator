@@ -10,10 +10,10 @@ namespace SocialMediaSimulator
     {
         int accountId { get; set; }
         static int nextId;
+        public static List<IUser> users = new List<IUser>();
 
-        void DeletePost(int accountId, int postId);
+        void DeletePost(Post deletePost);
 
-
-        void DeleteComment(int accountId, int postId ,int commentId);
+        void DeleteComment(Comment deleteComment);
     }
 }
