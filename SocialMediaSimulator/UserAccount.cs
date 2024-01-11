@@ -42,5 +42,36 @@ namespace SocialMediaSimulator
         {
             return this.accountName;
         }
+
+        public void DeletePost(Post deletePost)
+        {
+            foreach (Answer answer in Comment.comments)
+            {
+                if (answer._sourcePost.PostId == deletePost.PostId)
+                {
+                    Comment.comments.Remove(answer);
+                }
+            }
+            foreach (Comment comment in Comment.comments)
+            {
+                if (comment._sourcePost.PostId == deletePost.PostId)
+                {
+                    Comment.comments.Remove(comment);
+                }
+            }
+            Post.posts.Remove(deletePost);
+        }
+
+        public void DeleteComment(Comment deleteComment)
+        {
+            foreach (Answer answer in Comment.comments)
+            {
+                if (deleteComment.CommentId == answer.CommentId) // TODO change answer.CommentId to answer._sourceComment.CommentId
+                {
+                    Comment.comments.Remove(answer);
+                }
+            }
+            Comment.comments.Remove(deleteComment);
+        }
     }
 }

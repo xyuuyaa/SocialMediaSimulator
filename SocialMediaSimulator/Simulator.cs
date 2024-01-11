@@ -10,6 +10,8 @@ namespace SocialMediaSimulator
     {
         static SysAdmin adminUser;
         static UserAccount accountUser;
+        static Post deletePost;
+        static Comment deleteComment;
         public Simulator() 
         {
             SysAdmin admin1 = new SysAdmin();
@@ -119,11 +121,48 @@ namespace SocialMediaSimulator
                     StartMenu();
                     break;
                 case 3:
-                    // TODO delete post
-                    StartMenu();
+                    foreach (Post post in Post.posts)
+                    {
+                        Console.WriteLine(post);
+                    }
+                    int postId = int.Parse(Console.ReadLine());
+                    foreach (Post post in Post.posts)
+                    {
+                        if (post.PostId == postId)
+                        {
+                            deletePost = post;
+                            adminUser.DeletePost(deletePost);
+                            StartMenu();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid Id Number\n\n");
+                            ActivityMenuAdmin(3);
+                        }
+                    }
                     break;
                 case 4:
-                    // TODO delete comment
+                    foreach (Comment comment in Comment.comments)
+                    {
+                        Console.WriteLine(comment);
+                    }
+                    int commentId = int.Parse(Console.ReadLine());
+                    foreach (Comment comment in Comment.comments)
+                    {
+                        if (comment.CommentId == commentId)
+                        {
+                            deleteComment = comment;
+                            adminUser.DeleteComment(deleteComment);
+                            StartMenu();
+                        }
+                        else
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid Id Number\n\n");
+                            ActivityMenuAdmin(3);
+                        }
+                    }
                     StartMenu();
                     break;
                 case 5:
@@ -146,8 +185,8 @@ namespace SocialMediaSimulator
             {
                 case 1:
                     Console.WriteLine("Type the Content for your Post. Submit with ENTER");
-                    string PostContent = Console.ReadLine();
-                    // TODO create new Post object here and add to Post List
+                    string postContent = Console.ReadLine();
+                    accountUser.NewPost(accountUser, postContent);
                     StartMenu();
                     break;
                 case 2:
