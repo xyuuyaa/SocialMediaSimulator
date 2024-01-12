@@ -49,16 +49,14 @@ namespace SocialMediaSimulator
                         accountUser = (UserAccount)currentUser;
                         Console.Clear();
                         UserAccount accUser = (UserAccount)currentUser;
-                        MainMenuUser(accUser);
-                    } 
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Invalid Id Number\n\n");
-                    StartMenu();
+                        MainMenuUserAcc(accUser);
+                    }
+                    
                 }
             }
+            Console.Clear();
+            Console.WriteLine("Invalid Id Number\n\n");
+            StartMenu(); 
         }
 
         private void MainMenuAdmin()
@@ -171,7 +169,7 @@ namespace SocialMediaSimulator
             }
         }
 
-        public void MainMenuUser(UserAccount user)
+        public void MainMenuUserAcc(UserAccount user)
         {
             Console.WriteLine($"MAIN MENU\n\nYou are now active as {user.accountName} !\nWhat do you want to do?\n1 Add new Post.\t2 Look at Posts.\t3 Go to start menu.");
             int chosenMainActivity = int.Parse(Console.ReadLine());

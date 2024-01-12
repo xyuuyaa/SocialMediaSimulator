@@ -21,7 +21,7 @@ namespace SocialMediaSimulator
             CommentId = Interlocked.Increment(ref nextId);
             _sourcePost = sourcePost;
             _commentingUser = commentingUser;
-            comments.Add(new Comment(commentingUser, sourcePost, commentContent));
+            comments.Add(this);
             _sourceComment = sourceComment;
             _commentContent = commentContent;
         }

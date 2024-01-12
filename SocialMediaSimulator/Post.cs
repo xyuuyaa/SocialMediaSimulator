@@ -19,7 +19,7 @@ namespace SocialMediaSimulator
         public Post(UserAccount postingUser, string postContent)
         {
             PostId = Interlocked.Increment(ref nextId);
-            posts.Add(new Post(postingUser, postContent));
+            posts.Add(this);
             _postingUser = postingUser;
             _postContent = postContent;
         }
