@@ -8,19 +8,16 @@ namespace SocialMediaSimulator
 {
     internal class Answer : Comment
     {
-        string m_username;
-        string initialContent;
-        string content;
-        public Comment _sourceComment;
-        public Post _sourcePost; // ??
         public IUser _answeringUser;
 
-        // TODO help, I need Parameter sourceComment
-        public Answer(UserAccount commentingUser, Post sourcePost, string commentContent) : base(commentingUser, sourcePost, commentContent)
+        public Answer(UserAccount commentingUser, Post sourcePost, string commentContent, Comment sourceComment = null) : base(commentingUser, sourcePost, commentContent, sourceComment)
         {
-            // _sourceComment = sourceComment;
-            _sourcePost = sourcePost;
             _answeringUser = commentingUser;
+        }
+
+        public override string ToString()
+        {
+            return $"\nAnswer under the Comment {_sourceComment} from {_answeringUser}: {_commentContent}";
         }
     }
 }

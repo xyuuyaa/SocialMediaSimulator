@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialMediaSimulator
 {
-    internal class Simulator
+    internal class Simulator 
     {
         static SysAdmin adminUser;
         static UserAccount accountUser;
@@ -200,7 +200,18 @@ namespace SocialMediaSimulator
 
         private void UserAccPosts() 
         {
-            // TODO Display the Contens of Post List with PostID, comments(+commentId) and answers if available
+            foreach (Post post in Post.posts) 
+            {
+                Console.WriteLine(post);
+            }
+            foreach (Comment comment in Comment.comments)
+            {
+                Console.WriteLine(comment);
+            }
+            foreach (Answer answer in Comment.comments)
+            {
+                Console.WriteLine(answer);
+            }
             Console.WriteLine("What do you want to do?\n1 Delete Post.\t2 Delete Comment.\t3 Add comment\t4 Return to start menu");
             int chosenSubActivity = int.Parse(Console.ReadLine());
             switch (chosenSubActivity)
@@ -208,14 +219,59 @@ namespace SocialMediaSimulator
                 case 1:
                     Console.WriteLine("Type the Id of the Post you want to delete: ");
                     int deletePostId = int.Parse(Console.ReadLine());
-                    // TODO delete post
-                    // foreach (post in PostList) { if (deletePostId == post.PostId) { Remove Item from list}} if (deletePostId > PostList.Count) { ConsoleWriteLine("no Post has this Id.") Console.Clear(); return to main menu}
+                    foreach (Post post in Post.posts)
+                    {
+                        if (post.PostId == deletePostId)
+                        {
+                            if (post._postingUser == accountUser)
+                            {
+                                accountUser.DeletePost(post);
+                                Console.Clear();
+                                StartMenu();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("This is not your post.");
+                                UserAccPosts();
+                            }
+                        }
+                        else if (deletePostId > post.PostId)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid Id Number\n\n");
+                            UserAccPosts();
+                        }
+                    }
                     StartMenu();
                     break;
                 case 2:
                     Console.WriteLine("Type the Id of the Comment you want to delete: ");
                     int deleteCommentId = int.Parse(Console.ReadLine());
-                    // TODO delete comment
+                    foreach (Comment comment in Comment.comments)
+                    {
+                        if (comment.CommentId == deleteCommentId)
+                        {
+                            if (comment._sourcePost._postingUser == accountUser)
+                            {
+                                accountUser.DeleteComment(comment);
+                                Console.Clear();
+                                StartMenu();
+                            }
+                            else
+                            {
+                                Console.Clear();
+                                Console.WriteLine("You can't delete a comment under someone elses post.");
+                                UserAccPosts();
+                            }
+                        }
+                        else if (deleteCommentId > comment.CommentId)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Invalid Id Number\n\n");
+                            UserAccPosts();
+                        }
+                    }
                     StartMenu();
                     break;
                 case 3:
@@ -225,14 +281,53 @@ namespace SocialMediaSimulator
                     {
                         Console.WriteLine("Type the Id of the Post where you want to add your comment.");
                         int commentPostId = int.Parse(Console.ReadLine());
-                        // TODO add comment to post
-                        // if (commentPostId <= PostList.Count)
+                        foreach (Post post in Post.posts)
+                        {
+                            if (post.PostId == commentPostId)
+                            {
+                                Console.WriteLine("Type your comment content: ");
+                                string commentContent = Console.ReadLine();
+                                accountUser.NewComment(accountUser, post, commentContent);
+                                Console.Clear();
+                                StartMenu();
+                            }
+                            else if (commentPostId > post.PostId)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid Id Number\n\n");
+                                UserAccPosts();
+                            }
+                        }
                         StartMenu();
                     }
                     else if (commentTypeChoice == 2)
                     {
-                        // TODO add answer
+                        Console.WriteLine("Type the Id of the Comment where you want to add your answer.");
+                        int AnswerCommentId = int.Parse(Console.ReadLine());
+                        foreach (Comment comment in Comment.comments)
+                        {
+                            if (comment.CommentId == AnswerCommentId)
+                            {
+                                Console.WriteLine("Type your answer content: ");
+                                string answerContent = Console.ReadLine();
+                                accountUser.NewAnswer(accountUser, comment._sourcePost, comment, answerContent);
+                                Console.Clear();
+                                StartMenu();
+                            }
+                            else if (AnswerCommentId > comment.CommentId)
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Invalid Id Number\n\n");
+                                UserAccPosts();
+                            }
+                        }
                         StartMenu();
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Invalid choice.");
+                        UserAccPosts();
                     }
                     break;
                 case 4:
