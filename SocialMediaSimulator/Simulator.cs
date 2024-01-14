@@ -80,8 +80,7 @@ namespace SocialMediaSimulator
                         Console.WriteLine("Account name can't be null.");
                         ActivityMenuAdmin(1);
                     }
-                    UserAccount newUser = new UserAccount(accName);
-                    IUser.users.Add(newUser);
+                    adminUser.AddAccount(accName);
                     StartMenu();
                     break;
                 case 2:

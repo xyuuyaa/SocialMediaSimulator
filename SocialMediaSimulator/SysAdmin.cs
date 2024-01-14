@@ -30,27 +30,6 @@ namespace SocialMediaSimulator
 
         public void DeleteAccount(IUser deleteAcc)
         {
-            foreach (Answer answer in Comment.comments) 
-            { 
-                if (answer._answeringUser.accountId == deleteAcc.accountId)
-                {
-                    Comment.comments.Remove(answer);
-                }
-            }
-            foreach (Comment comment in Comment.comments) 
-            {
-                if (comment._commentingUser.accountId == deleteAcc.accountId)
-                {
-                    Comment.comments.Remove(comment);
-                }
-            }
-            foreach (Post post in Post.posts) 
-            {
-                if (post._postingUser.accountId == deleteAcc.accountId)
-                {
-                    Post.posts.Remove(post);
-                }
-            }
             IUser.users.Remove(deleteAcc);
         }
     }
