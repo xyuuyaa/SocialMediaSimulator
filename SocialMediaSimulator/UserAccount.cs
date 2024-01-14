@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace SocialMediaSimulator
 {
-    internal class UserAccount : IUser
+    public class UserAccount : IUser
     {
         public int accountId { get; set; }
         public string accountName;
@@ -42,8 +42,5 @@ namespace SocialMediaSimulator
         {
             return this.accountName;
         }
-        
-        public void DeletePost(Post deletePost) { }
-        public void DeleteComment(Comment deleteComment) { }
     }
 }

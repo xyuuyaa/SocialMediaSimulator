@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace SocialMediaSimulator
 {
@@ -16,7 +17,6 @@ namespace SocialMediaSimulator
         {
             SysAdmin admin1 = new SysAdmin();
             IUser.users.Add(admin1);
-            admin1.AddAccount("test");
         }
         public void StartMenu()
         {
@@ -61,7 +61,7 @@ namespace SocialMediaSimulator
 
         private void MainMenuAdmin()
         {
-            Console.WriteLine("MAIN MENU\n\nYou are now active as the admin !\nWhat do you want to do?\n1 Add new account.\t2 Delete account.\t3 Delete Post.\t4 Delete Comment.\t5 Go back to Start Menu.");
+            Console.WriteLine("MAIN MENU\n\nYou are now active as the admin !\nWhat do you want to do?\n1 Add new account.\t2 Delete account.\t3 Go back to Start Menu.");
             int chosenMainActivity = int.Parse(Console.ReadLine());
             Console.Clear();
             ActivityMenuAdmin(chosenMainActivity);
@@ -119,51 +119,6 @@ namespace SocialMediaSimulator
                     StartMenu();
                     break;
                 case 3:
-                    foreach (Post post in Post.posts)
-                    {
-                        Console.WriteLine(post);
-                    }
-                    int postId = int.Parse(Console.ReadLine());
-                    foreach (Post post in Post.posts)
-                    {
-                        if (post.PostId == postId)
-                        {
-                            deletePost = post;
-                            adminUser.DeletePost(deletePost);
-                            StartMenu();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Invalid Id Number\n\n");
-                            ActivityMenuAdmin(3);
-                        }
-                    }
-                    break;
-                case 4:
-                    foreach (Comment comment in Comment.comments)
-                    {
-                        Console.WriteLine(comment);
-                    }
-                    int commentId = int.Parse(Console.ReadLine());
-                    foreach (Comment comment in Comment.comments)
-                    {
-                        if (comment.CommentId == commentId)
-                        {
-                            deleteComment = comment;
-                            adminUser.DeleteComment(deleteComment);
-                            StartMenu();
-                        }
-                        else
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Invalid Id Number\n\n");
-                            ActivityMenuAdmin(3);
-                        }
-                    }
-                    StartMenu();
-                    break;
-                case 5:
                     StartMenu();
                     break;
             }
@@ -202,77 +157,19 @@ namespace SocialMediaSimulator
             {
                 Console.WriteLine(post);
             }
-            foreach (Comment comment in Comment.comments)
+            foreach (var comment in Comment.comments)
             {
                 Console.WriteLine(comment);
             }
-            foreach (Answer answer in Comment.comments)
+            /*foreach (Answer answer in Comment.comments)
             {
                 Console.WriteLine(answer);
-            }
-            Console.WriteLine("What do you want to do?\n1 Delete Post.\t2 Delete Comment.\t3 Add comment\t4 Return to start menu");
+            }*/
+            Console.WriteLine("What do you want to do?\n1 Add comment\t2 Return to start menu");
             int chosenSubActivity = int.Parse(Console.ReadLine());
             switch (chosenSubActivity)
             {
                 case 1:
-                    Console.WriteLine("Type the Id of the Post you want to delete: ");
-                    int deletePostId = int.Parse(Console.ReadLine());
-                    foreach (Post post in Post.posts)
-                    {
-                        if (post.PostId == deletePostId)
-                        {
-                            if (post._postingUser == accountUser)
-                            {
-                                accountUser.DeletePost(post);
-                                Console.Clear();
-                                StartMenu();
-                            }
-                            else
-                            {
-                                Console.Clear();
-                                Console.WriteLine("This is not your post.");
-                                UserAccPosts();
-                            }
-                        }
-                        else if (deletePostId > post.PostId)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Invalid Id Number\n\n");
-                            UserAccPosts();
-                        }
-                    }
-                    StartMenu();
-                    break;
-                case 2:
-                    Console.WriteLine("Type the Id of the Comment you want to delete: ");
-                    int deleteCommentId = int.Parse(Console.ReadLine());
-                    foreach (Comment comment in Comment.comments)
-                    {
-                        if (comment.CommentId == deleteCommentId)
-                        {
-                            if (comment._sourcePost._postingUser == accountUser)
-                            {
-                                accountUser.DeleteComment(comment);
-                                Console.Clear();
-                                StartMenu();
-                            }
-                            else
-                            {
-                                Console.Clear();
-                                Console.WriteLine("You can't delete a comment under someone elses post.");
-                                UserAccPosts();
-                            }
-                        }
-                        else if (deleteCommentId > comment.CommentId)
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Invalid Id Number\n\n");
-                            UserAccPosts();
-                        }
-                    }
-                    StartMenu();
-                    break;
-                case 3:
                     Console.WriteLine("1 Add comment to post.\t2 Add Answer to comment");
                     int commentTypeChoice = int.Parse(Console.ReadLine());
                     if (commentTypeChoice == 1)
@@ -328,7 +225,7 @@ namespace SocialMediaSimulator
                         UserAccPosts();
                     }
                     break;
-                case 4:
+                case 2:
                     StartMenu();
                     break;
             }

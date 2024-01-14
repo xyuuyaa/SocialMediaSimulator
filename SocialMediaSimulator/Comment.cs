@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialMediaSimulator
 {
-    internal class Comment
+    public class Comment
     {
         static int nextId;
         public int CommentId { get; private set; }
@@ -19,9 +19,9 @@ namespace SocialMediaSimulator
         public Comment(UserAccount commentingUser, Post sourcePost, string commentContent, Comment sourceComment = null)
         {
             CommentId = Interlocked.Increment(ref nextId);
+            comments.Add(this);
             _sourcePost = sourcePost;
             _commentingUser = commentingUser;
-            comments.Add(this);
             _sourceComment = sourceComment;
             _commentContent = commentContent;
         }

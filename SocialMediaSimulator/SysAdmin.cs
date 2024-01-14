@@ -8,7 +8,7 @@ using System.Xml.Linq;
 
 namespace SocialMediaSimulator  
 {
-    internal class SysAdmin : IUser
+    public class SysAdmin : IUser
     {
         public int accountId { get; set; }
 
@@ -53,9 +53,5 @@ namespace SocialMediaSimulator
             }
             IUser.users.Remove(deleteAcc);
         }
-
-        public void DeletePost(Post deletePost) { }
-
-        public void DeleteComment(Comment deleteComment) { }
     }
 }

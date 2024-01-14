@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SocialMediaSimulator
 {
-    internal class Post
+    public class Post
     {
         string m_userName;
         string description;
